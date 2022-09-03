@@ -38,7 +38,7 @@ async function loadNews2() {
     const url = "https://www.vice.com/id_id/rss"
     let result = "";
     data = await getNews(url);
-    console.log(data);
+
     for (let i = 0; i < 5; i++) {
 
         // source = data.querySelectorAll("image")[i].querySelector("url").textContent;
@@ -64,12 +64,12 @@ async function loadNews3() {
     const url = "https://mediaindonesia.com/feed";
     let result = "";
     data = await getNews(url);
-    console.log(data);
+
     for (let i = 0; i < 5; i++) {
 
         // source = data.querySelectorAll("image")[i].querySelector("url").textContent;
         link = data.querySelectorAll("item")[i].querySelector('link').textContent;
-        image = data.querySelectorAll("item")[i].querySelector('enclosure').getAttribute('url');
+        image = data.querySelectorAll("item")[i].childNodes[15].getAttribute('url');
         title = data.querySelectorAll("item")[i].querySelector('title').textContent;
         desc = data.querySelectorAll("item")[i].querySelector('description').textContent;
 
@@ -87,6 +87,7 @@ async function loadNews3() {
 }
 loadNews();
 loadNews2();
+loadNews3();
 
 
 
