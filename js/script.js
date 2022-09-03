@@ -1,5 +1,4 @@
 async function getNews(url) {
-    // const result = document.getElementById("result");
     return fetch(url)
         .then((response) => response.text())
         .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
@@ -10,47 +9,88 @@ async function getNews(url) {
 }
 
 async function loadNews() {
-    const url = [
-        "https://www.cnnindonesia.com/nasional/rss",
-        // "https://www.vice.com/id_id/rss",
-        // "https://mediaindonesia.com/feed"
-    ];
+    const url = "https://www.cnnindonesia.com/nasional/rss";
+
     let result = "";
     data = await getNews(url);
+
     for (let i = 0; i < 5; i++) {
+        // source = data.querySelectorAll("image")[i].querySelector("url").textContent;
+        link = data.querySelectorAll("item")[i].querySelector('link').textContent;
+        image = data.querySelectorAll("item")[i].querySelector('enclosure').getAttribute('url');
+        title = data.querySelectorAll("item")[i].querySelector('title').textContent;
+        desc = data.querySelectorAll("item")[i].childNodes[11].textContent;
 
-        // console.log(data);
+        result += `<div class="card border-dark mb-3 col" style="width: 25rem;">` +
+            `<img src="${image}" class="card-img-top" alt="...">` +
+            `<div class="card-body">` +
+            `<h5 class="card-title">${title}</h5>` +
+            `<p class="card-text">${desc}</p>` +
+            `<a href="${link}" class="btn btn-primary">Selengkapnya</a>` +
+            `</div>` +
+            `</div>`;
+    }
 
-        // console.log(data.getElementsByTagName("title")[0])
+    document.getElementById("result").innerHTML = result;
+}
+
+async function loadNews2() {
+    const url = "https://www.vice.com/id_id/rss"
+    let result = "";
+    data = await getNews(url);
+    console.log(data);
+    for (let i = 0; i < 5; i++) {
 
         // source = data.querySelectorAll("image")[i].querySelector("url").textContent;
         link = data.querySelectorAll("item")[i].querySelector('link').textContent;
-        imagesrc = data.querySelectorAll("item")[i].querySelector('enclosure').getAttribute('url');
+        image = data.querySelectorAll("item")[i].querySelector('enclosure').getAttribute('url');
+        title = data.querySelectorAll("item")[i].querySelector('title').textContent;
+        desc = data.querySelectorAll("item")[i].querySelector('description').textContent;
 
-        // document.getElementById("news-img").setAttribute("src", imagesrc);
-        // document.getElementById("news-title").innerHTML = `${data[i].querySelectorAll("item")[i].querySelector('title').textContent}`;
-        // document.getElementById("news-desc").innerHTML = `${data[i].querySelectorAll("item")[i].childNodes[11].textContent}`;
-        // document.getElementById("news-desc").setAttribute("href", link);
-
-        result += `<div class="card" style="width: 18rem;">` +
-            `<img src="${imagesrc}" class="card-img-top" id="news-img" alt="...">` +
+        result += `<div class="card border-dark mb-3 col" style="width: 25rem;">` +
+            `<img src="${image}" class="card-img-top" alt="...">` +
             `<div class="card-body">` +
-            `<h5 class="card-title" id="news-title">${data.querySelectorAll("item")[i].querySelector('title').textContent}</h5>` +
-            `<p class="card-text" id="news-desc">${data.querySelectorAll("item")[i].childNodes[11].textContent}</p>` +
-            `<a href="${link}" class="btn btn-primary" id="news-link">Selengkapnya</a>` +
+            `<h5 class="card-title">${title}</h5>` +
+            `<p class="card-text">${desc}</p>` +
+            `<a href="${link}" class="btn btn-primary">Selengkapnya</a>` +
             `</div>` +
             `</div>`;
-
-        document.getElementById("result").innerHTML = result;
-
-        // console.log(data[i].querySelector("item").childNodes[11].innerHTML)
-        // result.innerHTML = `<img src='${source}' width='50' />` +
-        //     `<p>${data[i].querySelector("item").querySelector('title').textContent}</p>` +
-        //     `<img src='${imagesrc}' />`;
     }
+    document.getElementById("result-2").innerHTML = result;
+
 }
 
+async function loadNews3() {
+    const url = "https://mediaindonesia.com/feed";
+    let result = "";
+    data = await getNews(url);
+    console.log(data);
+    for (let i = 0; i < 5; i++) {
+
+        // source = data.querySelectorAll("image")[i].querySelector("url").textContent;
+        link = data.querySelectorAll("item")[i].querySelector('link').textContent;
+        image = data.querySelectorAll("item")[i].querySelector('enclosure').getAttribute('url');
+        title = data.querySelectorAll("item")[i].querySelector('title').textContent;
+        desc = data.querySelectorAll("item")[i].querySelector('description').textContent;
+
+        result += `<div class="card border-dark mb-3 col" style="width: 25rem;">` +
+            `<img src="${image}" class="card-img-top" alt="...">` +
+            `<div class="card-body">` +
+            `<h5 class="card-title">${title}</h5>` +
+            `<p class="card-text">${desc}</p>` +
+            `<a href="${link}" class="btn btn-primary">Selengkapnya</a>` +
+            `</div>` +
+            `</div>`;
+    }
+    document.getElementById("result-3").innerHTML = result;
+
+}
 loadNews();
+loadNews2();
+
+
+
+
 
 async function getGempa(url) {
     return fetch(url)
