@@ -20,6 +20,7 @@ async function loadNews() {
         image = data.querySelectorAll("item")[i].querySelector('enclosure').getAttribute('url');
         title = data.querySelectorAll("item")[i].querySelector('title').textContent;
         desc = data.querySelectorAll("item")[i].childNodes[11].textContent;
+        date = data.querySelectorAll("item")[i].querySelector("pubDate").textContent;
 
         result += `<div class="card border-dark mb-3 col" style="width: 25rem;">` +
             `<img src="${image}" class="card-img-top" alt="...">` +
@@ -28,6 +29,7 @@ async function loadNews() {
             `<p class="card-text">${desc}</p>` +
             `<a href="${link}" class="btn btn-primary">Selengkapnya</a>` +
             `</div>` +
+            `<div class="card-footer">${date}</div>` +
             `</div>`;
     }
 
@@ -38,6 +40,7 @@ async function loadNews2() {
     const url = "https://www.vice.com/id_id/rss"
     let result = "";
     data = await getNews(url);
+    console.log(data)
 
     for (let i = 0; i < 5; i++) {
 
@@ -46,6 +49,8 @@ async function loadNews2() {
         image = data.querySelectorAll("item")[i].querySelector('enclosure').getAttribute('url');
         title = data.querySelectorAll("item")[i].querySelector('title').textContent;
         desc = data.querySelectorAll("item")[i].querySelector('description').textContent;
+        date = data.querySelectorAll("item")[i].querySelector("pubDate").textContent;
+
 
         result += `<div class="card border-dark mb-3 col" style="width: 25rem;">` +
             `<img src="${image}" class="card-img-top" alt="...">` +
@@ -54,6 +59,7 @@ async function loadNews2() {
             `<p class="card-text">${desc}</p>` +
             `<a href="${link}" class="btn btn-primary">Selengkapnya</a>` +
             `</div>` +
+            `<div class="card-footer">${date}</div>` +
             `</div>`;
     }
     document.getElementById("result-2").innerHTML = result;
@@ -72,6 +78,8 @@ async function loadNews3() {
         image = data.querySelectorAll("item")[i].childNodes[15].getAttribute('url');
         title = data.querySelectorAll("item")[i].querySelector('title').textContent;
         desc = data.querySelectorAll("item")[i].querySelector('description').textContent;
+        date = data.querySelectorAll("item")[i].querySelector("pubDate").textContent;
+
 
         result += `<div class="card border-dark mb-3 col" style="width: 25rem;">` +
             `<img src="${image}" class="card-img-top" alt="...">` +
@@ -80,11 +88,13 @@ async function loadNews3() {
             `<p class="card-text">${desc}</p>` +
             `<a href="${link}" class="btn btn-primary">Selengkapnya</a>` +
             `</div>` +
+            `<div class="card-footer">${date}</div>` +
             `</div>`;
     }
     document.getElementById("result-3").innerHTML = result;
 
 }
+
 loadNews();
 loadNews2();
 loadNews3();
