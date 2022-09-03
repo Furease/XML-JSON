@@ -14,6 +14,8 @@ async function loadNews() {
     let result = "";
     data = await getNews(url);
 
+    result = `<h3>CNN Indonesia</h3>`;
+
     for (let i = 0; i < 5; i++) {
         // source = data.querySelectorAll("image")[i].querySelector("url").textContent;
         link = data.querySelectorAll("item")[i].querySelector('link').textContent;
@@ -40,7 +42,8 @@ async function loadNews2() {
     const url = "https://www.vice.com/id_id/rss"
     let result = "";
     data = await getNews(url);
-    console.log(data)
+    result = `<h3>VICE</h3>`;
+
 
     for (let i = 0; i < 5; i++) {
 
@@ -70,6 +73,8 @@ async function loadNews3() {
     const url = "https://mediaindonesia.com/feed";
     let result = "";
     data = await getNews(url);
+    result = `<h3>Media Indonesia</h3>`;
+
 
     for (let i = 0; i < 5; i++) {
 
