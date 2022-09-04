@@ -8,8 +8,9 @@ async function getGempa(url) {
 async function loadGempa() {
     const url = "https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json";
     const data = await getGempa(url);
-    // const gempa = JSON.parse(data);
-    console.log(data.Infogempa.gempa[0]);
+
+    const gempa = data.Infogempa.gempa;
+    console.log(gempa)
     result = `<table class="table">` +
         `<thead>` +
         `<tr>` +
@@ -31,16 +32,16 @@ async function loadGempa() {
     for (let i = 0; i < 15; i++) {
         result += `<tr>` +
             `<th scope="row">${i+1}</th>` +
-            `<td>${data.Infogempa.gempa[i].Tanggal}</td>` +
-            `<td>${data.Infogempa.gempa[i].Jam}</td>` +
-            `<td>${data.Infogempa.gempa[i].DateTime}</td>` +
-            `<td>${data.Infogempa.gempa[i].Coordinates}</td>` +
-            `<td>${data.Infogempa.gempa[i].Lintang}</td>` +
-            `<td>${data.Infogempa.gempa[i].Bujur}</td>` +
-            `<td>${data.Infogempa.gempa[i].Magnitude}</td>` +
-            `<td>${data.Infogempa.gempa[i].Kedalaman}</td>` +
-            `<td>${data.Infogempa.gempa[i].Wilayah}</td>` +
-            `<td>${data.Infogempa.gempa[i].Potensi}</td>` +
+            `<td>${gempa[i].Tanggal}</td>` +
+            `<td>${gempa[i].Jam}</td>` +
+            `<td>${gempa[i].DateTime}</td>` +
+            `<td>${gempa[i].Coordinates}</td>` +
+            `<td>${gempa[i].Lintang}</td>` +
+            `<td>${gempa[i].Bujur}</td>` +
+            `<td>${gempa[i].Magnitude}</td>` +
+            `<td>${gempa[i].Kedalaman}</td>` +
+            `<td>${gempa[i].Wilayah}</td>` +
+            `<td>${gempa[i].Potensi}</td>` +
             `</tr>`;
     }
     result += `<tbody>`;
