@@ -5,7 +5,6 @@ async function getNews(url) {
         .then((data) => {
             return data;
         });
-
 }
 
 async function loadNews() {
@@ -103,20 +102,3 @@ async function loadNews3() {
 loadNews();
 loadNews2();
 loadNews3();
-
-
-
-
-
-async function getGempa(url) {
-    return fetch(url)
-        .then((response) => {
-            return response.json();
-        })
-}
-
-async function loadGempa() {
-    const url = "https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json";
-    const gempa = await getGempa(url);
-    console.log(gempa);
-}
